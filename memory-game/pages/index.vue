@@ -1,25 +1,28 @@
 <template>
-  <h1>Discus-Memory Game</h1>
-  <h2>Turns: {{ turnCount }}</h2>
-  <div class="container">
-    <div class="card-grid">
-      <div
-          v-for="card in cards"
-          :key="card.id"
-          :class="['card', {'flipped': card.flipped}]"
-          @click="flipCard(card)"
-      >
-        <div class="back">
-          <img :src="cardBackValue" :width="100" :height="100"/>
-        </div>
-        <div class="front">
-          <img :src= "card.value" :width="100" :height="100"/>
+  <div id = "wrapper">
+    <h1>Discus-Memory Game</h1>
+    <h2>Turns: {{ turnCount }}</h2>
+    <div class="container">
+      <div class="card-grid">
+        <div
+            v-for="card in cards"
+            :key="card.id"
+            :class="['card', {'flipped': card.flipped}]"
+            @click="flipCard(card)"
+        >
+          <div class="back">
+            <img :src="cardBackValue" :width="100" :height="100"/>
+          </div>
+          <div class="front">
+            <img :src= "card.value" :width="100" :height="100"/>
+          </div>
         </div>
       </div>
+      <div v-if="win" class="win-message">You finished in {{ turnCount }} turns! {{ winMessage }}</div>
+      <button id = "btnRestart" @click="resetGame()">Restart</button>
     </div>
-    <div v-if="win" class="win-message">You finished in {{ turnCount }} turns! Good job!</div>
-    <button id = "btnRestart" @click="resetGame()">Restart</button>
   </div>
+
 
 </template>
 
@@ -29,12 +32,14 @@ export default {
     return {
       cards: [],
       selectedCards: [],
-      totalCards: 4,
-      cardValues: [`/images/discus1.png`, `/images/discus1.png`, `/images/discus2.png`, `/images/discus2.png`],
+      totalCards: 20,
+      cardValues: [`/images/discus1.png`, `/images/discus1.png`, `/images/discus2.png`, `/images/discus2.png`, `/images/discus3.png`, `/images/discus3.png`, `/images/discus4.png`, `/images/discus4.png`, `/images/discus5.png`, `/images/discus5.png`, `/images/discus6.png`, `/images/discus6.png`, `/images/discus7.png`, `/images/discus7.png`, `/images/discus8.png`, `/images/discus8.png`, `/images/discus9.png`, `/images/discus9.png`, `/images/discus10.png`, `/images/discus10.png`],
       cardBackValue: `/images/cardBack.png`,
       flippedCards: 0,
       turnCount: 0,
-      win: false
+      win: false,
+      winMessage: "",
+      winTable: [[15, "You cheated!"],[25, "Very well done!"],[35, "Not bad!"],[45, "You can do better. Try again!"]]
     };
   },
 
@@ -67,6 +72,12 @@ export default {
           this.selectedCards = [];
           if (this.flippedCards === this.totalCards) {
             this.win = true;
+            for(let i=0; i<this.winTable.length; i++) {
+              if (this.turnCount <= this.winTable[i][0]) {
+                this.winMessage = this.winTable[i][1];
+                break;
+              }
+            }
           }
         } else {
           setTimeout(() => {
@@ -84,6 +95,7 @@ export default {
       this.flippedCards = 0;
       this.selectedCards.length = 0;
       this.win = false;
+      this.winMessage = "";
       this.initCards()
     }
   }
@@ -92,11 +104,19 @@ export default {
 
 <style>
 
+#wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
 h1 {
   font-family: Lato,serif;
   font-size: 40px;
   text-align: center;
-  margin-bottom: 12vh;
+  margin-bottom: 4vh;
   color: #005ea6;
 }
 
@@ -137,6 +157,12 @@ h2 {
   cursor: pointer;
 }
 
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .card.flipped {
   transform: rotateY(180deg);
   pointer-events: none;
@@ -156,7 +182,6 @@ h2 {
 
 .front {
   transform: rotateY(180deg);
-  background-color: lightblue;
 }
 
 .win-message {
@@ -179,10 +204,25 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   margin-top: 40px;
+  margin-bottom: 40px;
 }
 
 #btnRestart:hover {
   background-color: #005ea6;
+}
+
+@media only screen and (max-device-height: 740px) {
+  .card {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media only screen and (max-device-width: 580px) {
+  .card {
+    width: 60px;
+    height: 60px;
+  }
 }
 
 </style>
