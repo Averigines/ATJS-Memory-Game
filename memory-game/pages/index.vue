@@ -1,7 +1,7 @@
 <template>
+  <h1>Discus-Memory Game</h1>
+  <h2>Turns: {{ turnCount }}</h2>
   <div class="container">
-    <h1>Discus-Memory Game</h1>
-    <div>Turns: {{ turnCount }}</div>
     <div class="card-grid">
       <div
           v-for="card in cards"
@@ -17,8 +17,10 @@
         </div>
       </div>
     </div>
-    <div v-if="win" class="win-message">You finished in {{ turnCount }} turns! Congratulations!</div>
+    <div v-if="win" class="win-message">You finished in {{ turnCount }} turns! Good job!</div>
+    <button id = "btnRestart" @click="resetGame()">Restart</button>
   </div>
+
 </template>
 
 <script>
@@ -74,24 +76,54 @@ export default {
           }, 1000);
         }
       }
+    },
+    resetGame() {
+      this.cards.forEach(card => card.flipped = false);
+      this.cards.length = 0;
+      this.turnCount = 0;
+      this.flippedCards = 0;
+      this.selectedCards.length = 0;
+      this.win = false;
+      this.initCards()
     }
   }
 };
 </script>
 
 <style>
+
+h1 {
+  font-family: Lato,serif;
+  font-size: 40px;
+  text-align: center;
+  margin-bottom: 12vh;
+}
+
+h2 {
+  font-family: Lato,serif;
+  font-size: 24px;
+  text-align: center;
+}
+
+.win-message {
+  font-family: Lato,serif;
+}
+
 .container {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: auto;
+
 }
 
 .card-grid {
+  border-bottom: #4caf50;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 10px;
+  padding-bottom: 40px;
 }
 
 .card {
@@ -132,4 +164,23 @@ export default {
   text-align: center;
   margin-top: 20px;
 }
+
+#btnRestart {
+  font-family: Lato,serif;
+  font-size: 24px;
+  background-color: #0077be;
+  border: none;
+  color: #fff;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#btnRestart:hover {
+  background-color: #005ea6;
+}
+
 </style>
