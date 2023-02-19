@@ -97,12 +97,14 @@ h1 {
   font-size: 40px;
   text-align: center;
   margin-bottom: 12vh;
+  color: #005ea6;
 }
 
 h2 {
   font-family: Lato,serif;
   font-size: 24px;
   text-align: center;
+  color: #005ea6;
 }
 
 .win-message {
@@ -123,7 +125,6 @@ h2 {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 10px;
-  padding-bottom: 40px;
 }
 
 .card {
@@ -177,6 +178,7 @@ h2 {
   display: inline-block;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 40px;
 }
 
 #btnRestart:hover {
