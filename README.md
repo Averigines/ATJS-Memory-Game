@@ -1,42 +1,34 @@
-# Nuxt 3 Minimal Starter
+## Description
+Small memory game using Vue.js and Nuxt.js. The game was done for an university assignment.
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## Tech Stack
+- Vue.js
+- Nuxt.js
 
 ## Setup
 
-Make sure to install the dependencies:
+### Prerequisites
+- Node.js
+- npm 
+  ```sh
+  npm install -g npm
+  ```
 
-```bash
-# yarn
-yarn install
+### Steps
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/Averigines/ATJS-Memory-Game.git
+    ```
 
-# npm
-npm install
+2. Install dependencies:
+    ```sh
+    npm install
+    ```
 
-# pnpm
-pnpm install
-```
+3. Run the application on a development server:
+    ```sh
+    npm run dev
+    ```
 
-## Development Server
+4. Open your browser and navigate to `http://localhost:3000`.
 
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-npm run build
-```
-
-Locally preview production build:
-
-```bash
-npm run preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
